@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>漫画 | Artwork Portfolio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --surface: rgba(255, 250, 244, 0.82);
+      --ink: #1f1a17;
+      --muted: #6c5d53;
+      --line: rgba(78, 54, 37, 0.18);
+      --accent-deep: #7f3f1d;
+      --shadow: 0 18px 50px rgba(67, 42, 24, 0.12);
+      font-family: "Hiragino Mincho ProN", "Yu Mincho", "Times New Roman", serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: linear-gradient(180deg, #f8f2ea 0%, #efe6da 100%); }
+    main { width: min(calc(100% - 2rem), 1100px); margin: 0 auto; padding: 32px 0 56px; }
+    .panel { border: 1px solid var(--line); border-radius: 28px; background: var(--surface); box-shadow: var(--shadow); padding: 28px; }
+    .back { display: inline-block; margin-bottom: 18px; color: var(--accent-deep); text-decoration: none; }
+    h1, h2, p { margin: 0; }
+    h1 { font-size: clamp(2.4rem, 6vw, 4rem); margin-bottom: 12px; }
+    p { color: var(--muted); line-height: 1.8; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
+    .card { overflow: hidden; border-radius: 22px; background: #fffaf4; border: 1px solid var(--line); }
+    .card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #eadfd1; }
+    .card div { padding: 16px; }
+    .card h2 { font-size: 1.1rem; margin-bottom: 8px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="index.html">← Top に戻る</a>
+    <section class="panel">
+      <h1>漫画</h1>
+      <p>ストーリー作品やページ単位の作品をまとめるカテゴリです。ページ画像や作品概要を並べて使えます。</p>
+      <div class="grid">
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80" alt="漫画作品サンプル1">
+          <div><h2>作品タイトル 01</h2><p>作品説明をここに入れます。</p></div>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=900&q=80" alt="漫画作品サンプル2">
+          <div><h2>作品タイトル 02</h2><p>作品説明をここに入れます。</p></div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
