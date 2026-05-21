@@ -162,7 +162,7 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.35fr 0.85fr;
+      grid-template-columns: 1fr;
       gap: 24px;
       align-items: end;
       position: relative;
@@ -268,29 +268,6 @@
       border-color: rgba(127, 63, 29, 0.18);
     }
 
-    .hero-note {
-      align-self: stretch;
-      padding: 22px;
-      border-radius: 22px;
-      background: rgba(255, 250, 244, 0.76);
-      border: 1px solid rgba(127, 63, 29, 0.14);
-      backdrop-filter: blur(10px);
-      transform: translateY(24px);
-      animation: cardRise 1.1s cubic-bezier(0.22, 1, 0.36, 1) 220ms forwards;
-    }
-
-    .hero-note h2 {
-      font-size: 1.15rem;
-      margin-bottom: 14px;
-    }
-
-    .hero-note ul {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
     section {
       margin-top: 28px;
     }
@@ -326,6 +303,14 @@
       text-transform: uppercase;
       white-space: nowrap;
       font-size: 0.82rem;
+    }
+
+    .marquee-divider {
+      display: inline-block;
+      width: 1px;
+      height: 0.95rem;
+      background: rgba(127, 63, 29, 0.32);
+      align-self: center;
     }
 
     .section-title {
@@ -405,7 +390,7 @@
     }
 
     .about-card {
-      flex: 0 0 min(78vw, 780px);
+      flex: 0 0 min(70vw, 720px);
       min-height: 72vh;
       border-radius: 30px;
       border: 1px solid var(--line);
@@ -413,6 +398,7 @@
       box-shadow: var(--shadow);
       position: relative;
       overflow: hidden;
+      transform: translateY(var(--card-shift, 0));
     }
 
     .about-card::before {
@@ -463,6 +449,10 @@
       text-transform: uppercase;
     }
 
+    .works-intro {
+      margin-top: 28px;
+    }
+
     .meta {
       display: inline-block;
       margin-bottom: 10px;
@@ -500,6 +490,37 @@
       color: var(--muted);
       line-height: 1.8;
       margin-top: 10px;
+    }
+
+    .to-top {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 30;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 62px;
+      height: 62px;
+      border: 1px solid rgba(127, 63, 29, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 250, 244, 0.82);
+      color: var(--accent-deep);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    .to-top.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
     }
 
     footer {
@@ -596,10 +617,6 @@
         min-height: 56vh;
       }
 
-      .hero-note {
-        animation: none;
-        transform: none;
-      }
     }
 
     @media (max-width: 640px) {
@@ -656,8 +673,8 @@
       <div class="hero-ornament hero-ornament-two" aria-hidden="true"></div>
       <div class="hero-grid">
         <div>
-          <span class="eyebrow">Illustration Portfolio</span>
-          <h1>作品ポートフォリオ</h1>
+          <span class="eyebrow">about me</span>
+          <h1>syusyoku。</h1>
           <p class="hero-copy">
             イラスト、漫画、ラフをカテゴリごとに分けて見せるポートフォリオです。
             作品の空気感が伝わる余白と動きを残しつつ、見たい内容へ入りやすい構成にしています。
@@ -667,28 +684,29 @@
             <a class="button button-secondary" href="#contact">依頼・連絡先</a>
           </div>
         </div>
-        <aside class="hero-note">
-          <h2>使い方</h2>
-          <ul>
-            <li>画像を自分の作品データに差し替える</li>
-            <li>作品名、制作年、説明文を更新する</li>
-            <li>SNS やメールのリンクを自分用に変更する</li>
-          </ul>
-        </aside>
       </div>
     </header>
 
     <div class="marquee reveal" aria-hidden="true">
       <div class="marquee-track">
         <span id="marquee-time">00:00</span>
+        <span class="marquee-divider" aria-hidden="true"></span>
         <span>syusyoku。</span>
-        <span>309309</span>
-        <span id="marquee-temp">Yokohama 20°C</span>
+        <span class="marquee-divider" aria-hidden="true"></span>
+        <span>🍙🍚🍙</span>
+        <span class="marquee-divider" aria-hidden="true"></span>
+        <span id="marquee-temp">20°C</span>
+        <span class="marquee-divider" aria-hidden="true"></span>
         <span>syusyoku_309</span>
+        <span class="marquee-divider" aria-hidden="true"></span>
         <span id="marquee-time-clone">00:00</span>
+        <span class="marquee-divider" aria-hidden="true"></span>
         <span>syusyoku。</span>
-        <span>309309</span>
-        <span id="marquee-temp-clone">Yokohama 20°C</span>
+        <span class="marquee-divider" aria-hidden="true"></span>
+        <span>🍙🍚🍙</span>
+        <span class="marquee-divider" aria-hidden="true"></span>
+        <span id="marquee-temp-clone">20°C</span>
+        <span class="marquee-divider" aria-hidden="true"></span>
         <span>syusyoku_309</span>
       </div>
     </div>
@@ -708,7 +726,7 @@
     <section class="about-scroll reveal" id="about-scroll" aria-labelledby="about-title">
       <div class="about-sticky">
         <div class="about-track" id="about-track">
-          <article class="about-card">
+          <article class="about-card" style="--card-shift:-28px">
             <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=1200&q=80" alt="イラストカテゴリのイメージ">
             <div class="about-card-body">
               <span class="about-label">Works / 01</span>
@@ -718,7 +736,7 @@
             </div>
           </article>
 
-          <article class="about-card">
+          <article class="about-card" style="--card-shift:22px">
             <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80" alt="漫画カテゴリのイメージ">
             <div class="about-card-body">
               <span class="about-label">Works / 02</span>
@@ -728,7 +746,7 @@
             </div>
           </article>
 
-          <article class="about-card">
+          <article class="about-card" style="--card-shift:-14px">
             <img src="https://images.unsplash.com/photo-1494256997604-768d1f608cac?auto=format&fit=crop&w=1200&q=80" alt="ラフカテゴリのイメージ">
             <div class="about-card-body">
               <span class="about-label">Works / 03</span>
@@ -737,17 +755,17 @@
               <a class="category-link" href="rough.html">View Page →</a>
             </div>
           </article>
-        </div>
-      </div>
-    </section>
 
-    <section class="reveal" aria-labelledby="about-copy-title">
-      <div class="about-header">
-        <div>
-          <span class="eyebrow">Works</span>
-          <h2 class="section-title" id="about-copy-title">作品カテゴリ</h2>
+          <article class="about-card" style="--card-shift:34px">
+            <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1200&q=80" alt="記録カテゴリのイメージ">
+            <div class="about-card-body">
+              <span class="about-label">Works / 04</span>
+              <h3>記録</h3>
+              <p>日々の断片、旅先の記録、制作メモをまとめて残すカテゴリです。</p>
+              <a class="category-link" href="record.html">View Page →</a>
+            </div>
+          </article>
         </div>
-        <p>ここではイラスト、漫画、ラフの3カテゴリを横スライドで見せています。スクロールに合わせて順番に流れ、そのまま各ページへ進める構成です。</p>
       </div>
     </section>
 
@@ -768,9 +786,11 @@
     </footer>
   </div>
   </main>
+  <button class="to-top" id="to-top" type="button" aria-label="トップへ戻る">Top</button>
   <script>
     const introSplash = document.getElementById("intro-splash");
     const mainContent = document.getElementById("main-content");
+    const toTopButton = document.getElementById("to-top");
     const marqueeTime = document.getElementById("marquee-time");
     const marqueeTimeClone = document.getElementById("marquee-time-clone");
     const marqueeTemp = document.getElementById("marquee-temp");
@@ -784,7 +804,7 @@
       marqueeTimeClone.textContent = timeText;
     }
 
-    async function fetchTemperature(latitude, longitude, label) {
+    async function fetchTemperature(latitude, longitude) {
       const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m`);
       if (!response.ok) {
         throw new Error("weather fetch failed");
@@ -792,7 +812,7 @@
 
       const data = await response.json();
       const value = Math.round(data.current.temperature_2m);
-      const tempText = `${label} ${value}°C`;
+      const tempText = `${value}°C`;
       marqueeTemp.textContent = tempText;
       marqueeTempClone.textContent = tempText;
     }
@@ -802,10 +822,10 @@
 
       const fallback = async () => {
         try {
-          await fetchTemperature(yokohama.latitude, yokohama.longitude, yokohama.label);
+          await fetchTemperature(yokohama.latitude, yokohama.longitude);
         } catch {
-          marqueeTemp.textContent = "Yokohama --°C";
-          marqueeTempClone.textContent = "Yokohama --°C";
+          marqueeTemp.textContent = "--°C";
+          marqueeTempClone.textContent = "--°C";
         }
       };
 
@@ -817,7 +837,7 @@
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           try {
-            await fetchTemperature(position.coords.latitude, position.coords.longitude, "Current Temp");
+            await fetchTemperature(position.coords.latitude, position.coords.longitude);
           } catch {
             await fallback();
           }
@@ -852,6 +872,18 @@
       }
     }, { passive: true, once: true });
 
+    function updateToTopButton() {
+      if (window.scrollY > window.innerHeight * 0.6) {
+        toTopButton.classList.add("is-visible");
+      } else {
+        toTopButton.classList.remove("is-visible");
+      }
+    }
+
+    toTopButton.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
     const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
@@ -881,10 +913,13 @@
       }
 
       window.addEventListener("scroll", updateScrollEffects, { passive: true });
+      window.addEventListener("scroll", updateToTopButton, { passive: true });
       window.addEventListener("resize", updateScrollEffects);
       updateScrollEffects();
+      updateToTopButton();
     } else {
       reveals.forEach((element) => element.classList.add("is-visible"));
+      updateToTopButton();
     }
   </script>
 </body>

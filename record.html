@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>記録 | Artwork Portfolio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --surface: rgba(255, 250, 244, 0.82);
+      --ink: #1f1a17;
+      --muted: #6c5d53;
+      --line: rgba(78, 54, 37, 0.18);
+      --accent-deep: #7f3f1d;
+      --shadow: 0 18px 50px rgba(67, 42, 24, 0.12);
+      font-family: "Hiragino Mincho ProN", "Yu Mincho", "Times New Roman", serif;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: linear-gradient(180deg, #f8f2ea 0%, #efe6da 100%); }
+    main { width: min(calc(100% - 2rem), 1100px); margin: 0 auto; padding: 32px 0 56px; }
+    .panel { border: 1px solid var(--line); border-radius: 28px; background: var(--surface); box-shadow: var(--shadow); padding: 28px; }
+    .back { display: inline-block; margin-bottom: 18px; color: var(--accent-deep); text-decoration: none; }
+    h1, h2, p { margin: 0; }
+    h1 { font-size: clamp(2.4rem, 6vw, 4rem); margin-bottom: 12px; }
+    p { color: var(--muted); line-height: 1.8; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
+    .card { overflow: hidden; border-radius: 22px; background: #fffaf4; border: 1px solid var(--line); }
+    .card img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: #eadfd1; }
+    .card div { padding: 16px; }
+    .card h2 { font-size: 1.1rem; margin-bottom: 8px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="index.html">← Top に戻る</a>
+    <section class="panel">
+      <h1>記録</h1>
+      <p>日々の断片、旅先の写真、制作メモなどをまとめるカテゴリです。作品未満の素材や時間の流れを見せる場所として使えます。</p>
+      <div class="grid">
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=900&q=80" alt="記録サンプル1">
+          <div><h2>記録 01</h2><p>日々の記録やメモをここに入れます。</p></div>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1511300636408-a63a89df3482?auto=format&fit=crop&w=900&q=80" alt="記録サンプル2">
+          <div><h2>記録 02</h2><p>旅や風景の断片をここに入れます。</p></div>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1494256997604-768d1f608cac?auto=format&fit=crop&w=900&q=80" alt="記録サンプル3">
+          <div><h2>記録 03</h2><p>制作途中のメモや短文をここに入れます。</p></div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
