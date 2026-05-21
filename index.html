@@ -384,6 +384,79 @@
       font-size: 0.95rem;
     }
 
+    .story-scroll {
+      position: relative;
+      height: 300vh;
+      margin-top: 28px;
+    }
+
+    .story-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .story-track {
+      display: flex;
+      gap: 24px;
+      padding: 0 8vw;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .story-panel {
+      flex: 0 0 min(78vw, 780px);
+      min-height: 72vh;
+      padding: 32px 28px;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(160deg, rgba(255, 250, 244, 0.92), rgba(245, 233, 219, 0.82)),
+        rgba(255, 250, 244, 0.88);
+      box-shadow: var(--shadow);
+      display: grid;
+      align-content: end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(201, 111, 59, 0.22), transparent 34%);
+      pointer-events: none;
+    }
+
+    .story-panel h3 {
+      position: relative;
+      margin-bottom: 14px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+    }
+
+    .story-panel p {
+      position: relative;
+      max-width: 26ch;
+      color: var(--muted);
+      line-height: 1.95;
+      font-size: 1rem;
+      white-space: pre-line;
+    }
+
+    .story-label {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--accent-deep);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
     .gallery-header {
       display: flex;
       justify-content: space-between;
@@ -558,6 +631,26 @@
         grid-template-columns: 1fr;
       }
 
+      .story-scroll {
+        height: auto;
+      }
+
+      .story-sticky {
+        position: static;
+        height: auto;
+      }
+
+      .story-track {
+        display: grid;
+        gap: 18px;
+        padding: 0;
+        transform: none !important;
+      }
+
+      .story-panel {
+        min-height: auto;
+      }
+
       .intro-text {
         border-right: 0;
         border-bottom: 1px solid var(--line);
@@ -697,6 +790,43 @@
       </div>
     </section>
 
+    <section class="story-scroll reveal" id="story-scroll" aria-labelledby="story-title">
+      <div class="story-sticky">
+        <div class="story-track" id="story-track">
+          <article class="story-panel">
+            <span class="story-label">Story / 01</span>
+            <h3 id="story-title">誰もが旅に焦がれる近未来。</h3>
+            <p>観光業の競争が熾烈を極めるJPNでは、
+
+人気観光地は“独立観光特区”として活躍していた。</p>
+          </article>
+
+          <article class="story-panel">
+            <span class="story-label">Story / 02</span>
+            <h3>HAMA18区の再生</h3>
+            <p>かつて有数の観光特区だったHAMA18区は、
+
+今や落ちぶれてしまい見る影もない。</p>
+          </article>
+
+          <article class="story-panel">
+            <span class="story-label">Story / 03</span>
+            <h3>主人公の決意</h3>
+            <p>生まれ育ったHAMAを愛する主人公は、幼なじみに
+巻き込まれるまま観光業立て直しのため奮闘することに。</p>
+          </article>
+
+          <article class="story-panel">
+            <span class="story-label">Story / 04</span>
+            <h3>旅のパートナーたち</h3>
+            <p>少し不思議なハプニングと、おもてなしに賭ける情熱。
+
+旅のパートナーは、誰にも言えない荷物を抱えた観光区長たち。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="gallery" class="reveal" aria-labelledby="gallery-title">
       <div class="gallery-header">
         <div>
@@ -793,16 +923,31 @@
     reveals.forEach((element) => observer.observe(element));
 
     const cards = document.querySelectorAll(".category-card");
+    const storyScroll = document.getElementById("story-scroll");
+    const storyTrack = document.getElementById("story-track");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (!reduceMotion) {
-      window.addEventListener("scroll", () => {
+      function updateScrollEffects() {
         const scrollY = window.scrollY;
         cards.forEach((card, index) => {
           const rate = ((index % 3) - 1) * 8;
           card.style.setProperty("--parallax", `${scrollY * rate * 0.01}px`);
         });
-      }, { passive: true });
+
+        if (storyScroll && storyTrack && window.innerWidth > 960) {
+          const rect = storyScroll.getBoundingClientRect();
+          const maxOffset = Math.max(storyTrack.scrollWidth - window.innerWidth, 0);
+          const progress = Math.min(Math.max(-rect.top / Math.max(rect.height - window.innerHeight, 1), 0), 1);
+          storyTrack.style.transform = `translate3d(${-maxOffset * progress}px, 0, 0)`;
+        } else if (storyTrack) {
+          storyTrack.style.transform = "translate3d(0, 0, 0)";
+        }
+      }
+
+      window.addEventListener("scroll", updateScrollEffects, { passive: true });
+      window.addEventListener("resize", updateScrollEffects);
+      updateScrollEffects();
 
       cards.forEach((card) => {
         card.addEventListener("pointermove", (event) => {
