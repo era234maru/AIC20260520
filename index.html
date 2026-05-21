@@ -45,6 +45,76 @@
       padding: 24px 0 56px;
     }
 
+    .intro-splash {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      cursor: pointer;
+      isolation: isolate;
+    }
+
+    .intro-splash::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(16, 12, 10, 0.22), rgba(16, 12, 10, 0.08)),
+        url("https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1600&q=80") center/cover;
+      filter: saturate(0.92);
+      z-index: -2;
+    }
+
+    .intro-splash::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255, 250, 244, 0.08), rgba(16, 12, 10, 0.38));
+      z-index: -1;
+    }
+
+    .splash-inner {
+      text-align: center;
+      color: #fffaf4;
+    }
+
+    .splash-mark {
+      display: block;
+      font-size: clamp(3.4rem, 9vw, 7.8rem);
+      letter-spacing: 0.14em;
+      text-transform: lowercase;
+      line-height: 1;
+      text-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+    }
+
+    .splash-sub {
+      display: inline-block;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 250, 244, 0.38);
+      color: rgba(255, 250, 244, 0.8);
+      font-size: 0.82rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .splash-cue {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      color: rgba(255, 250, 244, 0.82);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      animation: cueFloat 2.2s ease-in-out infinite;
+    }
+
+    .main-content {
+      position: relative;
+    }
+
     .reveal {
       opacity: 0;
       transform: translateY(32px);
@@ -469,6 +539,17 @@
       }
     }
 
+    @keyframes cueFloat {
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(8px);
+      }
+    }
+
     @media (max-width: 960px) {
       .hero-grid,
       .intro,
@@ -512,6 +593,10 @@
       .hero-ornament-two {
         opacity: 0.4;
       }
+
+      .splash-mark {
+        letter-spacing: 0.08em;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -531,6 +616,15 @@
   </style>
 </head>
 <body>
+  <section class="intro-splash" id="intro-splash" aria-label="Intro">
+    <div class="splash-inner">
+      <span class="splash-mark">osyokuji dokoro</span>
+      <span class="splash-sub">Click or Scroll</span>
+    </div>
+    <div class="splash-cue">Enter</div>
+  </section>
+
+  <main class="main-content" id="main-content">
   <div class="page-shell">
     <header class="hero reveal">
       <div class="hero-ornament hero-ornament-one" aria-hidden="true"></div>
@@ -538,11 +632,10 @@
       <div class="hero-grid">
         <div>
           <span class="eyebrow">Illustration Portfolio</span>
-          <h1>描いた絵を、作品集として見せる。</h1>
+          <h1>作品ポートフォリオ</h1>
           <p class="hero-copy">
-            オリジナル作品、スケッチ、シリーズ制作までまとめて見せられる、
-            イラストポートフォリオ用のトップページです。作品ごとの空気感が伝わるように、
-            余白を大きく取りつつ一覧性も確保した構成にしています。
+            イラスト、漫画、ラフをカテゴリごとに分けて見せるポートフォリオです。
+            作品の空気感が伝わる余白と動きを残しつつ、見たい内容へ入りやすい構成にしています。
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#gallery">作品一覧を見る</a>
@@ -662,7 +755,31 @@
       © 2026 Artwork Portfolio
     </footer>
   </div>
+  </main>
   <script>
+    const introSplash = document.getElementById("intro-splash");
+    const mainContent = document.getElementById("main-content");
+    let introDismissed = false;
+
+    function enterPortfolio() {
+      if (introDismissed) return;
+      introDismissed = true;
+      mainContent.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    introSplash.addEventListener("click", enterPortfolio);
+    window.addEventListener("wheel", (event) => {
+      if (!introDismissed && event.deltaY > 10) {
+        enterPortfolio();
+      }
+    }, { passive: true });
+
+    window.addEventListener("touchmove", () => {
+      if (!introDismissed) {
+        enterPortfolio();
+      }
+    }, { passive: true, once: true });
+
     const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
