@@ -328,22 +328,6 @@
       font-size: 0.82rem;
     }
 
-    .intro {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 0;
-      overflow: hidden;
-    }
-
-    .intro-text,
-    .intro-stats {
-      padding: 28px;
-    }
-
-    .intro-text {
-      border-right: 1px solid var(--line);
-    }
-
     .section-title {
       margin-bottom: 12px;
       font-size: clamp(1.8rem, 3vw, 2.6rem);
@@ -356,41 +340,54 @@
       font-size: 1rem;
     }
 
-    .stats-grid {
+    .about-profile {
+      margin-top: 28px;
+      padding: 28px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: center;
     }
 
-    .stat {
-      padding: 18px;
-      border-radius: 20px;
-      background: var(--surface-strong);
-      border: 1px solid rgba(127, 63, 29, 0.12);
-      transform: translateY(var(--lift, 0));
+    .about-profile-visual {
+      overflow: hidden;
+      border-radius: 24px;
+      min-height: 320px;
+      background: #eadfd1;
     }
 
-    .stat strong {
+    .about-profile-visual img {
       display: block;
-      margin-bottom: 8px;
-      font-size: 2rem;
-      font-weight: 400;
-      color: var(--accent-deep);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .stat span {
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 0.95rem;
+    .about-profile-copy p + p {
+      margin-top: 12px;
     }
 
-    .story-scroll {
+    .about-scroll {
       position: relative;
-      height: 300vh;
+      height: 240vh;
       margin-top: 28px;
     }
 
-    .story-sticky {
+    .about-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .about-header p {
+      max-width: 54ch;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .about-sticky {
       position: sticky;
       top: 0;
       height: 100vh;
@@ -399,7 +396,7 @@
       align-items: center;
     }
 
-    .story-track {
+    .about-track {
       display: flex;
       gap: 24px;
       padding: 0 8vw;
@@ -407,119 +404,63 @@
       transform: translate3d(0, 0, 0);
     }
 
-    .story-panel {
+    .about-card {
       flex: 0 0 min(78vw, 780px);
       min-height: 72vh;
-      padding: 32px 28px;
       border-radius: 30px;
       border: 1px solid var(--line);
-      background:
-        linear-gradient(160deg, rgba(255, 250, 244, 0.92), rgba(245, 233, 219, 0.82)),
-        rgba(255, 250, 244, 0.88);
+      background: rgba(255, 250, 244, 0.88);
       box-shadow: var(--shadow);
-      display: grid;
-      align-content: end;
       position: relative;
       overflow: hidden;
     }
 
-    .story-panel::before {
+    .about-card::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top right, rgba(201, 111, 59, 0.22), transparent 34%);
+      background: linear-gradient(180deg, rgba(20, 16, 14, 0.06), rgba(20, 16, 14, 0.52));
       pointer-events: none;
+      z-index: 1;
     }
 
-    .story-panel h3 {
-      position: relative;
+    .about-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 72vh;
+      object-fit: cover;
+    }
+
+    .about-card-body {
+      position: absolute;
+      inset: auto 0 0 0;
+      z-index: 2;
+      padding: 28px;
+      color: #fffaf4;
+    }
+
+    .about-card h3 {
       margin-bottom: 14px;
       font-size: clamp(2rem, 4vw, 3.2rem);
       line-height: 1.05;
     }
 
-    .story-panel p {
-      position: relative;
+    .about-card p {
       max-width: 26ch;
-      color: var(--muted);
-      line-height: 1.95;
+      color: rgba(255, 250, 244, 0.86);
+      line-height: 1.9;
       font-size: 1rem;
       white-space: pre-line;
     }
 
-    .story-label {
-      position: relative;
+    .about-label {
       display: inline-block;
       margin-bottom: 18px;
-      color: var(--accent-deep);
+      color: rgba(255, 250, 244, 0.76);
       font-size: 0.78rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-    }
-
-    .gallery-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-
-    .gallery-header p {
-      max-width: 54ch;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .category-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 24px;
-      border: 1px solid var(--line);
-      background: var(--surface-strong);
-      box-shadow: var(--shadow);
-      transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(var(--parallax, 0px));
-      transition: transform 250ms ease, box-shadow 250ms ease;
-    }
-
-    .category-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(20, 16, 14, 0.08), rgba(20, 16, 14, 0.56));
-      z-index: 1;
-    }
-
-    .category-card img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      background: #eadfd1;
-      transition: transform 600ms ease;
-    }
-
-    .category-card:hover img {
-      transform: scale(1.04);
-    }
-
-    .category-card-body {
-      position: absolute;
-      inset: auto 0 0 0;
-      z-index: 2;
-      padding: 22px 20px 20px;
-      color: #fffaf4;
-    }
-
-    .category-card h3 {
-      font-size: 2rem;
-      margin-bottom: 8px;
     }
 
     .meta {
@@ -531,7 +472,7 @@
       text-transform: uppercase;
     }
 
-    .category-card p {
+    .about-card p {
       color: rgba(255, 250, 244, 0.82);
       line-height: 1.7;
       font-size: 0.96rem;
@@ -625,39 +566,34 @@
 
     @media (max-width: 960px) {
       .hero-grid,
-      .intro,
-      .contact,
-      .gallery-grid {
+      .about-profile,
+      .about-header,
+      .contact {
         grid-template-columns: 1fr;
       }
 
-      .story-scroll {
+      .about-scroll {
         height: auto;
       }
 
-      .story-sticky {
+      .about-sticky {
         position: static;
         height: auto;
       }
 
-      .story-track {
+      .about-track {
         display: grid;
         gap: 18px;
         padding: 0;
         transform: none !important;
       }
 
-      .story-panel {
+      .about-card {
         min-height: auto;
       }
 
-      .intro-text {
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr;
+      .about-card img {
+        min-height: 56vh;
       }
 
       .hero-note {
@@ -677,10 +613,6 @@
       .intro-stats,
       .contact {
         padding: 22px 18px;
-      }
-
-      .gallery-header {
-        align-items: start;
       }
 
       .hero-ornament-two {
@@ -731,7 +663,7 @@
             作品の空気感が伝わる余白と動きを残しつつ、見たい内容へ入りやすい構成にしています。
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#gallery">作品一覧を見る</a>
+            <a class="button button-primary" href="#about-scroll">作品一覧を見る</a>
             <a class="button button-secondary" href="#contact">依頼・連絡先</a>
           </div>
         </div>
@@ -748,124 +680,74 @@
 
     <div class="marquee reveal" aria-hidden="true">
       <div class="marquee-track">
-        <span>Artwork Portfolio</span>
-        <span>Original Illustration</span>
-        <span>Sketchbook Archive</span>
-        <span>Scene Design</span>
-        <span>Character Study</span>
-        <span>Artwork Portfolio</span>
-        <span>Original Illustration</span>
-        <span>Sketchbook Archive</span>
-        <span>Scene Design</span>
-        <span>Character Study</span>
+        <span id="marquee-time">00:00</span>
+        <span>syusyoku。</span>
+        <span>309309</span>
+        <span id="marquee-temp">Yokohama 20°C</span>
+        <span>syusyoku_309</span>
+        <span id="marquee-time-clone">00:00</span>
+        <span>syusyoku。</span>
+        <span>309309</span>
+        <span id="marquee-temp-clone">Yokohama 20°C</span>
+        <span>syusyoku_309</span>
       </div>
     </div>
 
-    <section class="panel intro reveal" aria-labelledby="about-title">
-      <div class="intro-text">
+    <section class="panel about-profile reveal" aria-labelledby="about-profile-title">
+      <div class="about-profile-visual">
+        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=80" alt="作者紹介のイメージ">
+      </div>
+      <div class="about-profile-copy">
         <span class="eyebrow">About</span>
-        <h2 class="section-title" id="about-title">作品の世界観と、描いているもの。</h2>
-        <p class="section-copy">
-          ここには自分のプロフィールや制作テーマを書きます。たとえば
-          「人物イラストを中心に、物語性のある色づかいを探している」
-          「キャラクターデザイン、書籍装画、SNS 投稿用ビジュアルを制作している」
-          のように、見る人が仕事のイメージを持ちやすい文章にすると強いです。
-        </p>
-      </div>
-      <div class="intro-stats">
-        <div class="stats-grid">
-          <div class="stat" style="--lift:-10px">
-            <strong>24</strong>
-            <span>公開作品数の目安。シリーズごとに増やしていけます。</span>
-          </div>
-          <div class="stat" style="--lift:10px">
-            <strong>3</strong>
-            <span>カテゴリ例。人物、風景、ラフや習作などで分けられます。</span>
-          </div>
-          <div class="stat" style="--lift:-4px">
-            <strong>2026</strong>
-            <span>最新更新年を入れておくと、活動中であることが伝わります。</span>
-          </div>
-        </div>
+        <h2 class="section-title" id="about-profile-title">作者紹介</h2>
+        <p class="section-copy">やわらかい光と静かな色を軸に、人物と風景のあいだにある空気を描いています。完成作品だけでなく、ラフや過程も含めて、発想の流れごと見せることを大切にしています。</p>
+        <p class="section-copy">イラスト、漫画、ラフそれぞれで見せ方を分けながら、見る人の中に小さな余韻が残るような温度のある絵を目指しています。</p>
       </div>
     </section>
 
-    <section class="story-scroll reveal" id="story-scroll" aria-labelledby="story-title">
-      <div class="story-sticky">
-        <div class="story-track" id="story-track">
-          <article class="story-panel">
-            <span class="story-label">Story / 01</span>
-            <h3 id="story-title">誰もが旅に焦がれる近未来。</h3>
-            <p>観光業の競争が熾烈を極めるJPNでは、
-
-人気観光地は“独立観光特区”として活躍していた。</p>
+    <section class="about-scroll reveal" id="about-scroll" aria-labelledby="about-title">
+      <div class="about-sticky">
+        <div class="about-track" id="about-track">
+          <article class="about-card">
+            <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=1200&q=80" alt="イラストカテゴリのイメージ">
+            <div class="about-card-body">
+              <span class="about-label">Works / 01</span>
+              <h3 id="about-title">イラスト</h3>
+              <p>完成作品やメインビジュアルをまとめたカテゴリです。</p>
+              <a class="category-link" href="illustration.html">View Page →</a>
+            </div>
           </article>
 
-          <article class="story-panel">
-            <span class="story-label">Story / 02</span>
-            <h3>HAMA18区の再生</h3>
-            <p>かつて有数の観光特区だったHAMA18区は、
-
-今や落ちぶれてしまい見る影もない。</p>
+          <article class="about-card">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80" alt="漫画カテゴリのイメージ">
+            <div class="about-card-body">
+              <span class="about-label">Works / 02</span>
+              <h3>漫画</h3>
+              <p>ストーリー作品やページ物を見せるためのカテゴリです。</p>
+              <a class="category-link" href="manga.html">View Page →</a>
+            </div>
           </article>
 
-          <article class="story-panel">
-            <span class="story-label">Story / 03</span>
-            <h3>主人公の決意</h3>
-            <p>生まれ育ったHAMAを愛する主人公は、幼なじみに
-巻き込まれるまま観光業立て直しのため奮闘することに。</p>
-          </article>
-
-          <article class="story-panel">
-            <span class="story-label">Story / 04</span>
-            <h3>旅のパートナーたち</h3>
-            <p>少し不思議なハプニングと、おもてなしに賭ける情熱。
-
-旅のパートナーは、誰にも言えない荷物を抱えた観光区長たち。</p>
+          <article class="about-card">
+            <img src="https://images.unsplash.com/photo-1494256997604-768d1f608cac?auto=format&fit=crop&w=1200&q=80" alt="ラフカテゴリのイメージ">
+            <div class="about-card-body">
+              <span class="about-label">Works / 03</span>
+              <h3>ラフ</h3>
+              <p>スケッチ、習作、制作過程をまとめて見せるカテゴリです。</p>
+              <a class="category-link" href="rough.html">View Page →</a>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="gallery" class="reveal" aria-labelledby="gallery-title">
-      <div class="gallery-header">
+    <section class="reveal" aria-labelledby="about-copy-title">
+      <div class="about-header">
         <div>
-          <span class="eyebrow">Gallery</span>
-          <h2 class="section-title" id="gallery-title">作品一覧</h2>
+          <span class="eyebrow">Works</span>
+          <h2 class="section-title" id="about-copy-title">作品カテゴリ</h2>
         </div>
-        <p>見たい作品の種類から選べるように、カテゴリごとに入口を分けています。各カテゴリをクリックすると、そのページへ進める構成です。</p>
-      </div>
-
-      <div class="gallery-grid">
-        <article class="category-card reveal" style="--delay:0ms">
-          <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=900&q=80" alt="イラストカテゴリのサンプル">
-          <div class="category-card-body">
-            <span class="meta">Category 01</span>
-            <h3>イラスト</h3>
-            <p>完成作品やメインビジュアルをまとめるカテゴリです。</p>
-            <a class="category-link" href="illustration.html">View Page →</a>
-          </div>
-        </article>
-
-        <article class="category-card reveal" style="--delay:80ms">
-          <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80" alt="漫画カテゴリのサンプル">
-          <div class="category-card-body">
-            <span class="meta">Category 02</span>
-            <h3>漫画</h3>
-            <p>ストーリー作品やページ物を見せるための入口です。</p>
-            <a class="category-link" href="manga.html">View Page →</a>
-          </div>
-        </article>
-
-        <article class="category-card reveal" style="--delay:160ms">
-          <img src="https://images.unsplash.com/photo-1494256997604-768d1f608cac?auto=format&fit=crop&w=900&q=80" alt="ラフカテゴリのサンプル">
-          <div class="category-card-body">
-            <span class="meta">Category 03</span>
-            <h3>ラフ</h3>
-            <p>スケッチ、習作、制作過程をまとめて見せるカテゴリです。</p>
-            <a class="category-link" href="rough.html">View Page →</a>
-          </div>
-        </article>
+        <p>ここではイラスト、漫画、ラフの3カテゴリを横スライドで見せています。スクロールに合わせて順番に流れ、そのまま各ページへ進める構成です。</p>
       </div>
     </section>
 
@@ -889,7 +771,67 @@
   <script>
     const introSplash = document.getElementById("intro-splash");
     const mainContent = document.getElementById("main-content");
+    const marqueeTime = document.getElementById("marquee-time");
+    const marqueeTimeClone = document.getElementById("marquee-time-clone");
+    const marqueeTemp = document.getElementById("marquee-temp");
+    const marqueeTempClone = document.getElementById("marquee-temp-clone");
     let introDismissed = false;
+
+    function updateTime() {
+      const now = new Date();
+      const timeText = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      marqueeTime.textContent = timeText;
+      marqueeTimeClone.textContent = timeText;
+    }
+
+    async function fetchTemperature(latitude, longitude, label) {
+      const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m`);
+      if (!response.ok) {
+        throw new Error("weather fetch failed");
+      }
+
+      const data = await response.json();
+      const value = Math.round(data.current.temperature_2m);
+      const tempText = `${label} ${value}°C`;
+      marqueeTemp.textContent = tempText;
+      marqueeTempClone.textContent = tempText;
+    }
+
+    async function setTemperature() {
+      const yokohama = { latitude: 35.4437, longitude: 139.6380, label: "Yokohama" };
+
+      const fallback = async () => {
+        try {
+          await fetchTemperature(yokohama.latitude, yokohama.longitude, yokohama.label);
+        } catch {
+          marqueeTemp.textContent = "Yokohama --°C";
+          marqueeTempClone.textContent = "Yokohama --°C";
+        }
+      };
+
+      if (!navigator.geolocation) {
+        await fallback();
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          try {
+            await fetchTemperature(position.coords.latitude, position.coords.longitude, "Current Temp");
+          } catch {
+            await fallback();
+          }
+        },
+        async () => {
+          await fallback();
+        },
+        { enableHighAccuracy: false, timeout: 5000, maximumAge: 600000 }
+      );
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+    setTemperature();
 
     function enterPortfolio() {
       if (introDismissed) return;
@@ -922,47 +864,25 @@
 
     reveals.forEach((element) => observer.observe(element));
 
-    const cards = document.querySelectorAll(".category-card");
-    const storyScroll = document.getElementById("story-scroll");
-    const storyTrack = document.getElementById("story-track");
+    const aboutScroll = document.getElementById("about-scroll");
+    const aboutTrack = document.getElementById("about-track");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (!reduceMotion) {
       function updateScrollEffects() {
-        const scrollY = window.scrollY;
-        cards.forEach((card, index) => {
-          const rate = ((index % 3) - 1) * 8;
-          card.style.setProperty("--parallax", `${scrollY * rate * 0.01}px`);
-        });
-
-        if (storyScroll && storyTrack && window.innerWidth > 960) {
-          const rect = storyScroll.getBoundingClientRect();
-          const maxOffset = Math.max(storyTrack.scrollWidth - window.innerWidth, 0);
+        if (aboutScroll && aboutTrack && window.innerWidth > 960) {
+          const rect = aboutScroll.getBoundingClientRect();
+          const maxOffset = Math.max(aboutTrack.scrollWidth - window.innerWidth, 0);
           const progress = Math.min(Math.max(-rect.top / Math.max(rect.height - window.innerHeight, 1), 0), 1);
-          storyTrack.style.transform = `translate3d(${-maxOffset * progress}px, 0, 0)`;
-        } else if (storyTrack) {
-          storyTrack.style.transform = "translate3d(0, 0, 0)";
+          aboutTrack.style.transform = `translate3d(${-maxOffset * progress}px, 0, 0)`;
+        } else if (aboutTrack) {
+          aboutTrack.style.transform = "translate3d(0, 0, 0)";
         }
       }
 
       window.addEventListener("scroll", updateScrollEffects, { passive: true });
       window.addEventListener("resize", updateScrollEffects);
       updateScrollEffects();
-
-      cards.forEach((card) => {
-        card.addEventListener("pointermove", (event) => {
-          const rect = card.getBoundingClientRect();
-          const px = (event.clientX - rect.left) / rect.width;
-          const py = (event.clientY - rect.top) / rect.height;
-          const rotateY = (px - 0.5) * 8;
-          const rotateX = (0.5 - py) * 8;
-          card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(var(--parallax, 0px))`;
-        });
-
-        card.addEventListener("pointerleave", () => {
-          card.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(var(--parallax, 0px))";
-        });
-      });
     } else {
       reveals.forEach((element) => element.classList.add("is-visible"));
     }
