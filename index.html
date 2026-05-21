@@ -55,15 +55,44 @@
       isolation: isolate;
     }
 
-    .intro-splash::before {
-      content: "";
+    .intro-splash-bg {
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(180deg, rgba(16, 12, 10, 0.22), rgba(16, 12, 10, 0.08)),
-        url("https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1600&q=80") center/cover;
-      filter: saturate(0.92);
+      background-position: center;
+      background-size: cover;
+      opacity: 0;
+      transform: scale(1.04);
+      transition: opacity 1200ms ease, transform 5200ms ease;
       z-index: -2;
+    }
+
+    .intro-splash-bg.is-active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .intro-splash-bg-1 {
+      background-image:
+        linear-gradient(180deg, rgba(16, 12, 10, 0.22), rgba(16, 12, 10, 0.08)),
+        url("https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1600&q=80");
+    }
+
+    .intro-splash-bg-2 {
+      background-image:
+        linear-gradient(180deg, rgba(16, 12, 10, 0.18), rgba(16, 12, 10, 0.12)),
+        url("https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=1600&q=80");
+    }
+
+    .intro-splash-bg-3 {
+      background-image:
+        linear-gradient(180deg, rgba(16, 12, 10, 0.18), rgba(16, 12, 10, 0.14)),
+        url("https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80");
+    }
+
+    .intro-splash-bg-4 {
+      background-image:
+        linear-gradient(180deg, rgba(16, 12, 10, 0.2), rgba(16, 12, 10, 0.1)),
+        url("https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1600&q=80");
     }
 
     .intro-splash::after {
@@ -659,6 +688,10 @@
 </head>
 <body>
   <section class="intro-splash" id="intro-splash" aria-label="Intro">
+    <div class="intro-splash-bg intro-splash-bg-1 is-active"></div>
+    <div class="intro-splash-bg intro-splash-bg-2"></div>
+    <div class="intro-splash-bg intro-splash-bg-3"></div>
+    <div class="intro-splash-bg intro-splash-bg-4"></div>
     <div class="splash-inner">
       <span class="splash-mark">osyokuji dokoro</span>
       <span class="splash-sub">Click or Scroll</span>
@@ -773,6 +806,7 @@
   <button class="to-top" id="to-top" type="button" aria-label="トップへ戻る">Top</button>
   <script>
     const introSplash = document.getElementById("intro-splash");
+    const introSplashBackgrounds = document.querySelectorAll(".intro-splash-bg");
     const mainContent = document.getElementById("main-content");
     const toTopButton = document.getElementById("to-top");
     const marqueeTime = document.getElementById("marquee-time");
@@ -780,6 +814,7 @@
     const marqueeTemp = document.getElementById("marquee-temp");
     const marqueeTempClone = document.getElementById("marquee-temp-clone");
     let introDismissed = false;
+    let activeSplashIndex = 0;
 
     function updateTime() {
       const now = new Date();
@@ -836,6 +871,14 @@
     updateTime();
     setInterval(updateTime, 1000);
     setTemperature();
+
+    if (introSplashBackgrounds.length > 1) {
+      setInterval(() => {
+        introSplashBackgrounds[activeSplashIndex].classList.remove("is-active");
+        activeSplashIndex = (activeSplashIndex + 1) % introSplashBackgrounds.length;
+        introSplashBackgrounds[activeSplashIndex].classList.add("is-active");
+      }, 3600);
+    }
 
     function enterPortfolio() {
       if (introDismissed) return;
